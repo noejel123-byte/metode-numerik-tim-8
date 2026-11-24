@@ -1,0 +1,9 @@
+Besaran,Nilai,Satuan
+Kerja kompresi numerik,-279.2691521261333,kJ/kg
+Kerja ekspansi numerik,731.056223335678,kJ/kg
+Kerja bersih numerik,451.78707120954476,kJ/kg
+Kerja bersih analitik,451.7797746815503,kJ/kg
+Kalor keluar,348.2202253184497,kJ/kg
+Efisiensi numerik (%),56.47247183519378,%
+Efisiensi ideal teoritis (%),56.472471835193794,%
+Kerja dari interpolasi,454.7477257263414,kJ/kg
