@@ -39,15 +39,18 @@ coef_e = np.polyfit(np.log(v34),np.log(p34),1)
 n_c,C_c = -coef_c[0],np.exp(coef_c[1])
 n_e,C_e = -coef_e[0],np.exp(coef_e[1])
 
-# METODE 2 - INTERPOLASI: ambil 25 titik data lalu interpolasi linier
-idx_c = np.unique(np.linspace(0,len(v12)-1,25).astype(int))
-idx_e = np.unique(np.linspace(0,len(v34)-1,25).astype(int))
-v_c_data,p_c_data = v12[idx_c],p12[idx_c]
-v_e_data,p_e_data = v34[idx_e],p34[idx_e]
-v_c_grid = np.linspace(v1,v2,200)
-v_e_grid = np.linspace(v2,v1,200)
-p_c_interp = np.interp(v_c_grid,v_c_data[::-1],p_c_data[::-1])
-p_e_interp = np.interp(v_e_grid,v_e_data,p_e_data)
+# METODE 2 - INTERPOLASI: menggunakan seluruh 100 titik data
+v_c_data = v12
+p_c_data = p12
+
+v_e_data = v34
+p_e_data = p34
+
+v_c_grid = np.linspace(v1, v2, 200)
+v_e_grid = np.linspace(v2, v1, 200)
+
+p_c_interp = np.interp(v_c_grid, v_c_data[::-1], p_c_data[::-1])
+p_e_interp = np.interp(v_e_grid, v_e_data, p_e_data)
 
 # METODE 3 - INTEGRASI: kerja batas W = integral(P dV), aturan trapesium
 w_kompresi = np.trapezoid(p12,v12)
