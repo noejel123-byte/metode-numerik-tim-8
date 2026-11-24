@@ -57,6 +57,37 @@ w_kompresi = np.trapezoid(p12,v12)
 w_ekspansi = np.trapezoid(p34,v34)
 w_numerik = w_kompresi+w_ekspansi
 w_interpolasi = np.trapezoid(p_c_interp,v_c_grid)+np.trapezoid(p_e_interp,v_e_grid)
+# Menyimpan ringkasan hasil perhitungan terbaru
+ringkasan = pd.DataFrame({
+    "Besaran": [
+        "Kerja kompresi numerik",
+        "Kerja ekspansi numerik",
+        "Kerja bersih numerik",
+        "Kerja bersih analitik",
+        "Kalor keluar",
+        "Kerja dari interpolasi",
+        "Galat kerja (%)",
+        "Efisiensi numerik (%)",
+        "Efisiensi ideal teoritis (%)"
+    ],
+    "Nilai": [
+        w_kompresi,
+        w_ekspansi,
+        w_numerik,
+        w_analitik,
+        qout,
+        w_interpolasi,
+        galat_persen,
+        eta_numerik * 100,
+        eta_teori * 100
+    ],
+    "Satuan": [
+        "kJ/kg", "kJ/kg", "kJ/kg", "kJ/kg",
+        "kJ/kg", "kJ/kg", "%", "%", "%"
+    ]
+})
+
+ringkasan.to_csv("hasil/ringkasan_hasil.csv", index=False)
 
 # Validasi terhadap neraca energi dan efisiensi ideal
 galat_persen = abs(w_numerik-w_analitik)/abs(w_analitik)*100
