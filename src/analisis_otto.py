@@ -57,6 +57,11 @@ w_kompresi = np.trapezoid(p12,v12)
 w_ekspansi = np.trapezoid(p34,v34)
 w_numerik = w_kompresi+w_ekspansi
 w_interpolasi = np.trapezoid(p_c_interp,v_c_grid)+np.trapezoid(p_e_interp,v_e_grid)
+
+# Validasi terhadap neraca energi dan efisiensi ideal
+galat_persen = abs(w_numerik-w_analitik)/abs(w_analitik)*100
+eta_numerik = w_numerik/qin
+
 # Menyimpan ringkasan hasil perhitungan terbaru
 ringkasan = pd.DataFrame({
     "Besaran": [
@@ -88,10 +93,6 @@ ringkasan = pd.DataFrame({
 })
 
 ringkasan.to_csv("hasil/ringkasan_hasil.csv", index=False)
-
-# Validasi terhadap neraca energi dan efisiensi ideal
-galat_persen = abs(w_numerik-w_analitik)/abs(w_analitik)*100
-eta_numerik = w_numerik/qin
 states = pd.DataFrame({
  "Titik":[1,2,3,4],
  "Tekanan_kPa":[P1,P2,P3,P4],
